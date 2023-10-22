@@ -14,6 +14,7 @@ class CepBuscaApi extends StatefulWidget {
 class _CepBuscaApiState extends State<CepBuscaApi> {
   var cepController = TextEditingController(text: "");
   bool displayAddress = false;
+  CepModel? foundCepData;
 
   bool loading = false;
 
@@ -55,44 +56,46 @@ class _CepBuscaApiState extends State<CepBuscaApi> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Text(
-          "Consulta de CEP",
-          style: TextStyle(fontSize: 22),
-        ),
-        TextField(
-          controller: cepController,
-          keyboardType: TextInputType.number,
-          onChanged: (String value) async {
-            var cep = value.replaceAll(RegExp(r'[^0-9]'), '');
-            if (cep.length == 8) {
-              setState(() {
-                loading = true;
-              });
-
-              final foundCepData = await viaCEPRepository.fetchCepApi(cep);
-
-              setState(() {
-                loading = false;
-              });
-
-              if (foundCepData != null) {
+    return Scaffold(
+      body: Column(
+        children: [
+          const Text(
+            "Consulta de CEP",
+            style: TextStyle(fontSize: 22),
+          ),
+          TextField(
+            controller: cepController,
+            keyboardType: TextInputType.number,
+            onChanged: (String value) async {
+              var cep = value.replaceAll(RegExp(r'[^0-9]'), '');
+              if (cep.length == 8) {
                 setState(() {
-                  displayAddress = true;
+                  loading = true;
                 });
-              } else {
-                showCepNotFoundAlert();
+
+                foundCepData = await viaCEPRepository.fetchCepApi(cep);
+                setState(() {
+                  loading = false;
+                });
+
+                if (foundCepData != null) {
+                  setState(() {
+                    displayAddress = true;
+                  });
+                } else {
+                  showCepNotFoundAlert();
+                }
               }
-            }
-          },
-        ),
-        const SizedBox(
-          height: 50,
-        ),
-        if (loading) const CircularProgressIndicator(),
-        if (displayAddress) AddressDetails(foundCepData),
-      ],
+            },
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          if (loading) const CircularProgressIndicator(),
+          if (displayAddress && foundCepData != null)
+            AddressDetails(foundCepData!),
+        ],
+      ),
     );
   }
 }
