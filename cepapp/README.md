@@ -1,16 +1,18 @@
-# cepapp
+# Busca de CEP na API viacep
 
-A new Flutter project.
+## Desafio - Cadastro de CEPs
+*   Criar uma aplicação Flutter
+*   Criar uma classe de CEP по Back4App
+*   Consulte um Cep no ViaCep, após retornado se não existir no Back4App, realizar o cadastro (em progresso)
+*   Listar os CEPs cadastrados em forma de lista, possibilitando a alteração e exclusão do CEP
 
-## Getting Started
+## Executando o Aplicativo Flutter
 
-This project is a starting point for a Flutter application.
+Para executar o aplicativo Flutter, siga os passos abaixo:
+* Certifique-se de ter o ambiente de desenvolvimento Flutter instalado. Caso não tenha, siga as instruções de instalação do Flutter.
+* Abra o terminal na pasta do seu projeto Flutter.
+* Execute o seguinte comando para iniciar o aplicativo no emulador ou dispositivo conectado:
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```
+flutter run
+```

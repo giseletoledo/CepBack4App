@@ -12,9 +12,10 @@ class CepBuscaApi extends StatefulWidget {
 }
 
 class _CepBuscaApiState extends State<CepBuscaApi> {
+  CepModel? foundCepData;
+
   var cepController = TextEditingController(text: "");
   bool displayAddress = false;
-  CepModel? foundCepData;
 
   bool loading = false;
 
